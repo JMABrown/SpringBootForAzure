@@ -1,0 +1,49 @@
+name: Trigger auto deployment for my-wee-container
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ main ]
+    paths:
+    - '**'
+    - '.github/workflows/my-wee-container-AutoDeployTrigger-dac2a765-aeb1-45dc-9405-9fe195d235f8.yml'
+
+  # Allow manual trigger 
+  workflow_dispatch:      
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions: 
+      id-token: write #This is required for requesting the OIDC JWT Token
+      contents: read #Required when GH token is used to authenticate with private repo
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.MYWEECONTAINER_AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.MYWEECONTAINER_AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.MYWEECONTAINER_AZURE_SUBSCRIPTION_ID }}
+
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v2
+        with:
+          appSourcePath: ${{ github.workspace }}/complete
+          _dockerfilePathKey_: _dockerfilePath_
+          _targetLabelKey_: _targetLabel_
+          registryUrl: docker.io
+          registryUsername: ${{ secrets.MYWEECONTAINER_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.MYWEECONTAINER_REGISTRY_PASSWORD }}
+          containerAppName: my-wee-container
+          resourceGroup: DefaultResourceGroup-PAR
+          imageToBuild: gamejammerjames/my-wee-container:${{ github.sha }}
+          _buildArgumentsKey_: |
+            _buildArgumentsValues_
+
+
