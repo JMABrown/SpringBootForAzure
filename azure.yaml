@@ -5,6 +5,6 @@ metadata:
   template: gs-spring-boot-for-azure@0.0.1-beta
 services:
   demo:
-    project: ./complete/
+    project: .
     host: springapp
     language: java
