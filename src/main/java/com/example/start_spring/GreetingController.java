@@ -1,6 +1,7 @@
 package com.example.start_spring;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,7 +15,8 @@ public class GreetingController {
 	}
 
 	@GetMapping("/hello")
-	public String greetingViaHtml() {
+	public String greetingViaHtml(Model model) {
+		model.addAttribute("message", "Hello at time: " + java.time.LocalDateTime.now());
 		return "hello";
 	}
 }
