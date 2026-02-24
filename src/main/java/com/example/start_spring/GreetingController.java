@@ -10,7 +10,7 @@ public class GreetingController {
 
 	@RequestMapping("/")
 	public @ResponseBody String greeting() {
-		return "Hello World again from Springboot";
+		return "Hello World again from Springboot 11:45";
 	}
 
 	@GetMapping("/hello")
