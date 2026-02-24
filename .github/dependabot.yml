@@ -3,8 +3,8 @@ updates:
 
   - package-ecosystem: "maven"
     directories:
-      - "/initial"
-      - "/complete"
+      - "/src"
+      - "/target"
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-patch"]
@@ -13,20 +13,5 @@ updates:
     target-branch: "main"
     groups:
       guide-dependencies-maven:
-        patterns:
-          - "*"
-
-  - package-ecosystem: "gradle"
-    directories:
-      - "/initial"
-      - "/complete"
-    ignore:
-      - dependency-name: "*"
-        update-types: ["version-update:semver-patch"]
-    schedule:
-      interval: "monthly"
-    target-branch: "main"
-    groups:
-      guide-dependencies-gradle:
         patterns:
           - "*"
