@@ -19,4 +19,10 @@ public class GreetingController {
 		model.addAttribute("message", "Hello at time: " + java.time.LocalDateTime.now());
 		return "hello";
 	}
+
+	@GetMapping("/fragment")
+	public String greetingWithFragment(Model model) {
+		model.addAttribute("message", "Hello at time: " + java.time.LocalDateTime.now());
+		return "helloWithFragment";
+	}
 }

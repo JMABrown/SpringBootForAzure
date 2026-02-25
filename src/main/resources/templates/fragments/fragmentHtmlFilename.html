@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    
+<body>
+    <div th:fragment="fragmentName">
+        <header>
+            <h2>Course App</h2>
+            <nav>
+                <a th:href="@{/hello}">Hello</a>
+                | <a th:href="@{/courses}">Courses</a>
+                | <a th:href="@{/api/courses}">API</a>
+            </nav>
+            <hr>
+        </header>
+    </div>
+
+    <div th:fragment="simpleFragment">
+        <hr>
+        <hr>
+    </div>
+</body>
+</html>
